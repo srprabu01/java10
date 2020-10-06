@@ -1,0 +1,22 @@
+import java.io.File;
+public class FileClassMethods {
+	public static void main(String[] args) {
+                                    Scanner myObj = new Scanner(System.in); 
+   		System.out.println("Enter File name");
+		String file = myObj.nextLine(); 
+		File myFile = new File(file);
+		if (myFile.exists()) {
+			System.out.println(myFile.getName() + " exists");
+			if (myFile.canRead())
+				System.out.println(" readable");
+			else
+				System.out.println(" not readable");
+			if (myFile.canWrite())
+				System.out.println(" writeable");
+			else
+				System.out.println(" not writeable");
+			System.out.println("File Type: "+myFile.getFileExtension(myFile.getAbsolutePath()));
+		} else
+			System.out.println("File does not exist");
+	}
+}

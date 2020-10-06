@@ -1,0 +1,60 @@
+class User implements Serializable {
+ private String name;
+ private int rollno;
+ public User(String name, int rollno) {
+  super();
+  this.name = name;
+  this.rollno=rollno;
+ }
+ public String getname() {
+  return name;
+ }
+
+ public void setname(String name) {
+  this.name = name;
+ }
+
+ public int getrollno() {
+  return getrollno;
+ }
+
+ public void setrollno(int rollno) {
+  this.rollno = rollno;
+ }
+}
+
+public class FileOperation {
+
+ public static void main(String[] args) {
+
+  try {
+   FileOutputStream fos = new FileOutputStream("user.txt");
+   ObjectOutputStream oos = new ObjectOutputStream(fos);
+   User user = new User("Ramakrishnan","78");
+   oos.writeObject(user);
+   oos.flush();
+   oos.close();
+   user = null;
+   FileInputStream fis = new FileInputStream("user.txt");
+   ObjectInputStream ois = new ObjectInputStream(fis);
+   user = (User) ois.readObject();
+   System.out.println("Enter the rollno ");
+   Scanner myObj = new Scanner(System.in);
+   int rno = myObj.nextLine();
+   if(rno==user.getrollno())
+   {
+  	 System.out.println("Name : " + user.getName());
+   	System.out.println("Rollno : " + user.getrollno());
+   }
+   else{
+	System.out.println("Given rollno is not found in file");
+     } 
+   ois.close();
+  } catch (IOException e) {
+   e.printStackTrace();
+  } catch (ClassNotFoundException e) {
+   e.printStackTrace();
+  }
+ }
+
+}
